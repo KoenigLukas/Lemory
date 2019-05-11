@@ -29,6 +29,9 @@ CREATE TABLE `stats` (
   `win` int(11) DEFAULT '0',
   `loss` int(11) DEFAULT '0',
   `bestTime` int(11) DEFAULT NULL,
+-- New Created and LastUpdate
+  `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `LastUpdated` TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`UserNr`),
   CONSTRAINT `UserNR` FOREIGN KEY (`UserNr`) REFERENCES `user` (`UserNr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -58,6 +61,8 @@ CREATE TABLE `user` (
   `VName` varchar(55) NOT NULL,
   `NName` varchar(55) NOT NULL,
   `Geburtstag` date NOT NULL,
+-- New Created 
+  `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`UserNr`),
   UNIQUE KEY `Username_UNIQUE` (`Username`),
   UNIQUE KEY `UserNr_UNIQUE` (`UserNr`),
