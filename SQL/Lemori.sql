@@ -1,4 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `lemory` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+DROP SCHEMA IF EXISTS `lemory`;
+CREATE SCHEMA IF NOT EXISTS `lemory`;
 USE `lemory`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
@@ -26,15 +27,13 @@ DROP TABLE IF EXISTS `stats`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `stats` (
   `UserNr` int(11) NOT NULL,
-  `win` int(11) DEFAULT '0',
-  `loss` int(11) DEFAULT '0',
-  `bestTime` int(11) DEFAULT NULL,
+  `won` boolean DEFAULT FALSE,
+  `time` int(11) DEFAULT NULL,
 -- New Created and LastUpdate
   `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `LastUpdated` TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`UserNr`),
   CONSTRAINT `UserNR` FOREIGN KEY (`UserNr`) REFERENCES `user` (`UserNr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +66,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `Username_UNIQUE` (`Username`),
   UNIQUE KEY `UserNr_UNIQUE` (`UserNr`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
