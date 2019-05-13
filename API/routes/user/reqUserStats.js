@@ -1,5 +1,5 @@
 const express = require('express');
-const sql = require('mysql');
+const sql = require('../../db.js');
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
