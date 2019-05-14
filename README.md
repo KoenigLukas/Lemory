@@ -40,10 +40,10 @@ As a Callback you'll receive an access Token which needs to be included in the H
 ### posible Statuscodes:
 |Status	|Description
 |-------|----|
-|200	|everything OK
-|400	|wrong Request-Body structure
-|404 	|wrong username or password
-|500	|Internal Server Error
+|200	|everything OK|
+|400	|wrong Request-Body structure|
+|404 	|wrong username or password|
+|500	|Internal Server Error|
 ## <a name="register"></a>Register Endpoint
 The Register endpoint allows for easy User-Registration. Required are the [Email Availability Check](#emailCheck]) and the [Username Availability Check](#usernameCheck) which both return statuscodes. These Statuscodes need to be included to the body of the call.
 
@@ -70,26 +70,26 @@ As a Callback you'll receive an access Token which needs to be included in the H
 ### posible Statuscodes:
 |Status	|Description
 |-------|----|
-|200	|everything OK
-|400	|wrong Request-Body structure
-|403	|request sent with taken username or email
-|404 	|wrong username or password
-|500	|Internal Server Error
+|200	|everything OK|
+|400	|wrong Request-Body structure|
+|403	|request sent with taken username or email|
+|404 	|wrong username or password|
+|500	|Internal Server Error|
 
 
 ## <a name="emailCheck"></a> Check Email availability Endpoint
 This Endpoint should be called when creating a user to let him know if his chosen email-address is available. As an awnser you will receive following status codes:
 |Status	|Description
 |-------|----|
-|404	|email-address available
-|200	|email-address already taken 
+|404	|email-address available|
+|200	|email-address already taken |
 
 The received status code needs to be included into the [Register Request](#register).
 ## <a name="usernameCheck"></a> Check Username availability Endpoint
 This Endpoint should be called when creating a user to let him know if his chosen username is available. As an awnser you will receive following status codes:
 |Status	|Description
 |-------|----|
-|404	|username available
-|200	|username already taken 
+|404	|username available|
+|200	|username already taken |
 
 The received status code needs to be included into the [Register Request](#register).
