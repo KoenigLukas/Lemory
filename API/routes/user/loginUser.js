@@ -5,50 +5,37 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
 const router = express.Router();
-
 const secret = "B1E74A38BDE2934F3DA4C3B8F897F";
 
-const loginschema = {
-    username: Joi.string().min(4).required(),
-    password: Joi.string().min(5).required()
+const loginSchema = {
+    username: Joi.string().alphanum().min(3).max(15).required(),
+    password: Joi.string().min(5).max(30).required()
 };
 
-router.post('/', async function (req, res) {
+router.post('/', function (req, res) {
 
-    const validation = Joi.validate(req.body, loginschema);
-    console.log(req.body.password);
-
+    const validation = Joi.validate(req.body, loginSchema);
     if (validation.error) {
         res.status(400).send(validation.error.details[0].message);
         return;
     }
 
-
-    sql.query(`SELECT * FROM user WHERE (username = "${req.body.username}" AND passwd = "${req.body.password}")`, function (err, result, fields) {
+    sql.query(`SELECT UserNr,Username FROM user WHERE (username = ? AND passwd = ?)`,[req.body.username,req.body.password],  (err, result, fields) => {
         if (err) {
 
-             res.sendStatus(400).send(err.message);
+             res.status(400).send(err.message);
 
-        } else if (!(result.length > 0)) {
+    } else if (!(result.length > 0)) {
 
-             res.send("not found");
+        res.status(404).send("not found");
 
-        } else {
+    } else {
 
-            const token = jwt.sign({id: result[0].userid, username: result[0].username}, secret);
+        const token = jwt.sign({id: result[0].UserNr, username: result[0].Username}, secret);
+        res.status(200).send({token: token});
 
-            // console.log(result[0].Username);
-            // console.log({id: result[0].UserNr, username: result[0].Username});
-            res.send({token: token});
-
-        }
-
-
+    }
     });
-
-
-
-
 });
 
 
