@@ -79,7 +79,7 @@ As a Callback you'll receive an access Token which needs to be included in the H
 
 ## <a name="emailCheck"></a> Check Email availability Endpoint
 This Endpoint should be called when creating a user to let him know if his chosen email-address is available. As an awnser you will receive following status codes:
-|Status	|Description
+|Status	|Description|
 |-------|----|
 |404	|email-address available|
 |200	|email-address already taken |
@@ -87,8 +87,8 @@ This Endpoint should be called when creating a user to let him know if his chose
 The received status code needs to be included into the [Register Request](#register).
 ## <a name="usernameCheck"></a> Check Username availability Endpoint
 This Endpoint should be called when creating a user to let him know if his chosen username is available. As an awnser you will receive following status codes:
-|Status	|Description
-|-------|----|
+|Status	|Description|
+|-------|-----------|
 |404	|username available|
 |200	|username already taken |
 
