@@ -23,7 +23,7 @@ The API is created by Lukas König. The API is an RESTful Web Service which allo
 ## Login Endpoint
 
 The Login endpoint requires a body in the following format:
-```JSON
+```
 {
 	username: <username>,
 	password: <password>
@@ -32,7 +32,7 @@ The Login endpoint requires a body in the following format:
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
 
-```JSON
+```
 {
 	token: <token>
 }
