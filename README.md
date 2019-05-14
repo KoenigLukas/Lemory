@@ -17,17 +17,17 @@ The API is created by Lukas König. The API is an RESTful Web Service which allo
 |----------------|-----------------|---------|
 |Login           |POST             |/api/user/login
 |Register		 |POST	 		   |/api/user/register
-|Check Email availability| GET | /api/user/register/checkEmail/`email`
-|Check Username availability| GET | /api/user/register/checkUsername/`username`
+|Check Email availability| GET 	   | /api/user/register/checkEmail/`email`
+|Check Username availability| GET  | /api/user/register/checkUsername/`username`
 
 ## Login Endpoint
 
 The Login endpoint requires a body in the following format:
 ```
-{
-	username: <username>,
-	password: <password>
-}
+	{
+		username: <username>,
+		password: <password>
+	}
 ```
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
@@ -37,7 +37,14 @@ As a Callback you'll receive an access Token which needs to be included in the H
 	token: <token>
 }
 ```
-## Register Endpoint
+### posible Statuscodes:
+|Status	|Description
+|-------|----|
+|200	|everything OK
+|400	|wrong Request-Body structure
+|404 	|wrong username or password
+|500	|Internal Server Error
+## <a name="register"></a>Register Endpoint
 The Register endpoint allows for easy User-Registration. Required are the [Email Availability Check](#emailCheck]) and the [Username Availability Check](#usernameCheck) which both return statuscodes. These Statuscodes need to be included to the body of the call.
 
 Register body format:
@@ -60,10 +67,29 @@ As a Callback you'll receive an access Token which needs to be included in the H
 	token: <token>
 }
 ```
-
+### posible Statuscodes:
+|Status	|Description
+|-------|----|
+|200	|everything OK
+|400	|wrong Request-Body structure
+|403	|request sent with taken username or email
+|404 	|wrong username or password
+|500	|Internal Server Error
 
 
 ## <a name="emailCheck"></a> Check Email availability Endpoint
->Moch i am Abend
+This Endpoint should be called when creating a user to let him know if his chosen email-address is available. As an awnser you will receive following status codes:
+|Status	|Description
+|-------|----|
+|404	|email-address available
+|200	|email-address already taken 
+
+The received status code needs to be included into the [Register Request](#register).
 ## <a name="usernameCheck"></a> Check Username availability Endpoint
->Moch i am Abend
+This Endpoint should be called when creating a user to let him know if his chosen username is available. As an awnser you will receive following status codes:
+|Status	|Description
+|-------|----|
+|404	|username available
+|200	|username already taken 
+
+The received status code needs to be included into the [Register Request](#register).
