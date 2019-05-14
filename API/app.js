@@ -1,3 +1,4 @@
+const result = require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
 
@@ -8,6 +9,12 @@ const putStatsRouter = require('./routes/user/stats/putStats');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
+if (result.error) {
+    throw result.error;
+}
+
+console.log(result.parsed);
 
 const port = process.env.PORT || 3000;
 
