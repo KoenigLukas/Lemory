@@ -24,10 +24,10 @@ The API is created by Lukas König. The API is an RESTful Web Service which allo
 
 The Login endpoint requires a body in the following format:
 ```
-	{
-		username: <username>,
-		password: <password>
-	}
+{
+	username: <username>,
+	password: <password>
+}
 ```
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
