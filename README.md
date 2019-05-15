@@ -25,10 +25,10 @@ The API is created by Lukas König. The API is an [REST](https://en.wikipedia.or
 
 The Login endpoint requires a body in the following format:
 ```
-{
-	username: <username>,
-	password: <password>
-}
+	{
+		username: <username>,
+		password: <password>
+	}
 ```
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
@@ -38,7 +38,7 @@ As a Callback you'll receive an access Token which needs to be included in the H
 	token: <token>
 }
 ```
-### possible Statuscodes:
+### posible Statuscodes:
 |Status	|Description
 |-------|----|
 |200	|everything OK|
@@ -54,7 +54,7 @@ Register body format:
 	user_available: <statuscode>,  //CALLBACK of checkUsername
 	email_available: <statuscode>, //CALLBACK of checkEmail
 	username: <username>,	//MIN 3 MAX 15
-	password: <password>,	//MIN 5 MAX 30
+	password: <password,	//MIN 5 MAX 30
 	email: <email-address>,
 	first_name: <first_name>, //MIN 2 MAX 15
 	last_name: <last_name>,	//MIN 2 MAX 15
@@ -68,7 +68,7 @@ As a Callback you'll receive an access Token which needs to be included in the H
 	token: <token>
 }
 ```
-### possible Statuscodes:
+### posible Statuscodes:
 |Status	|Description
 |-------|----|
 |200	|everything OK|
@@ -96,3 +96,7 @@ This Endpoint should be called when creating a user to let him know if his chose
 |200	|username already taken |
 
 The received status code needs to be included into the [Register Request](#register).
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjA0MzMxNDQ4XX0=
+-->
