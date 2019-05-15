@@ -1,7 +1,8 @@
-const express = require('express');
-const sql = require('../../db.js');
-const Joi = require('joi');
-const jwt = require('jsonwebtoken');
+import * as express from 'express';
+import * as sql from '../../db.js';
+import * as Joi from 'joi';
+import * as jwt from 'jsonwebtoken';
+import {Request, Response} from "express";
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ const loginSchema = {
     password: Joi.string().min(5).max(30).required()
 };
 
-router.post('/', function (req, res) {
+router.post('/', function (req: Request, res: Response) {
 
     const validation = Joi.validate(req.body, loginSchema);
     if (validation.error) {
@@ -31,6 +32,7 @@ router.post('/', function (req, res) {
 
         } else {
 
+            // @ts-ignore
             const token = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
             res.status(200).send({token: token});
 
@@ -40,4 +42,4 @@ router.post('/', function (req, res) {
 
 
 
-module.exports = router;
+export = router;

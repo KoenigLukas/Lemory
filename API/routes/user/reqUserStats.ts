@@ -1,9 +1,9 @@
-const express = require('express');
-const sql = require('mysql');
+import * as express from 'express';
+import * as sql from '../../db.js';
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
     res.send('PLEASE KILL ME NOW ');
 });
 
-module.exports = router;
+export = router;

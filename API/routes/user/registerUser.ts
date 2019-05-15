@@ -1,7 +1,9 @@
-const express = require('express');
-const sql = require('../../db.js');
-const Joi = require('joi');
-const jwt = require('jsonwebtoken');
+import * as express from 'express';
+import sql = require('../../db');
+
+import * as Joi from 'joi';
+import * as jwt from 'jsonwebtoken';
+import {Request, Response} from "express";
 
 const router = express.Router();
 
@@ -16,7 +18,7 @@ const registerSchema = {
     birth_date: Joi.string().regex(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
 };
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req: Request, res: Response, next) {
 
     const validation = Joi.validate(req.body, registerSchema);
     if (validation.error) {
@@ -49,6 +51,7 @@ router.post('/', function(req, res, next) {
 
                     } else {
 
+                        // @ts-ignore
                         const token = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
                         res.status(200).send({token: token});
 
@@ -58,8 +61,8 @@ router.post('/', function(req, res, next) {
     });
 });
 
-router.get('/checkEmail/:email', function(req, res, next) {
-    sql.query(`SELECT UserNr FROM user WHERE email = ?`,[req.body.email],  (err, result, fields) => {
+router.get('/checkEmail/:email', function(req: Request, res: Response, next) {
+    sql.query(`SELECT UserNr FROM user WHERE email = ?`,[req.params['email']],  (err, result, fields) => {
         if (err) {
 
             res.status(500).send(err.message);
@@ -77,7 +80,8 @@ router.get('/checkEmail/:email', function(req, res, next) {
 });
 
 router.get('/checkUsername/:username', function(req, res, next) {
-    sql.query(`SELECT UserNr FROM user WHERE username = ?`,[req.body.username],  (err, result, fields) => {
+
+    sql.query(`SELECT UserNr FROM user WHERE username = ?`,[req.params['username']],  (err, result, fields) => {
         if (err) {
 
             res.status(500).send(err.message);
@@ -92,6 +96,7 @@ router.get('/checkUsername/:username', function(req, res, next) {
 
         }
     });
+
 });
 
-module.exports = router;
+export = router;

@@ -1,5 +1,5 @@
-const express = require('express');
-const sql = require('../../db.js');
+import * as express from 'express';
+import * as sql from '../../db.js';
 const router = express.Router();
 
 router.post('/', function(req, res, next) {
@@ -9,5 +9,5 @@ router.post('/', function(req, res, next) {
 
 
 
-module.exports = router;
+export = router;
 
