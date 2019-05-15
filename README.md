@@ -38,7 +38,7 @@ As a Callback you'll receive an access Token which needs to be included in the H
 	token: <token>
 }
 ```
-### posible Statuscodes:
+### possible Statuscodes:
 |Status	|Description
 |-------|----|
 |200	|everything OK|
@@ -68,7 +68,7 @@ As a Callback you'll receive an access Token which needs to be included in the H
 	token: <token>
 }
 ```
-### posible Statuscodes:
+### possible Statuscodes:
 |Status	|Description
 |-------|----|
 |200	|everything OK|
