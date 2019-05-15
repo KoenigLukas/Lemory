@@ -25,10 +25,10 @@ The API is created by Lukas König. The API is an [REST](https://en.wikipedia.or
 
 The Login endpoint requires a body in the following format:
 ```
-	{
-		username: <username>,
-		password: <password>
-	}
+{
+	username: <username>,
+	password: <password>
+}
 ```
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
@@ -54,7 +54,7 @@ Register body format:
 	user_available: <statuscode>,  //CALLBACK of checkUsername
 	email_available: <statuscode>, //CALLBACK of checkEmail
 	username: <username>,	//MIN 3 MAX 15
-	password: <password,	//MIN 5 MAX 30
+	password: <password>,	//MIN 5 MAX 30
 	email: <email-address>,
 	first_name: <first_name>, //MIN 2 MAX 15
 	last_name: <last_name>,	//MIN 2 MAX 15
