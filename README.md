@@ -12,6 +12,14 @@ Lemory is a school project create by Pascal Abt, Lukas König, Benjamin Schellma
 
 The API is created by Lukas König. The API is an [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful Web Service which allows any Application supporting the HTTP protocol to access it. It provides endpoints for all needed database operations.
 
+## Built with
+
+ - TypeScript
+ - JavaScript
+ - NodeJS
+ - Express
+ - MySQL
+
 # API Doc
 
 |                |Operation Type   |ENDPOINT
@@ -25,10 +33,10 @@ The API is created by Lukas König. The API is an [REST](https://en.wikipedia.or
 
 The Login endpoint requires a body in the following format:
 ```
-	{
-		username: <username>,
-		password: <password>
-	}
+{
+	username: <username>,
+	password: <password>
+}
 ```
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
@@ -98,5 +106,5 @@ This Endpoint should be called when creating a user to let him know if his chose
 The received status code needs to be included into the [Register Request](#register).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0MzMxNDQ4XX0=
+eyJoaXN0b3J5IjpbLTE0MDY0NzU0NDYsMjA0MzMxNDQ4XX0=
 -->
