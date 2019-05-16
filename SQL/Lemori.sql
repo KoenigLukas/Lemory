@@ -26,13 +26,13 @@ DROP TABLE IF EXISTS `stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `stats` (
-  `UserNr` int(11) NOT NULL,
+  `usernr` int(11) NOT NULL,
   `won` boolean DEFAULT FALSE,
   `time` int(11) DEFAULT NULL,
 -- New Created and LastUpdate
-  `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`UserNr`),
-  CONSTRAINT `UserNR` FOREIGN KEY (`UserNr`) REFERENCES `user` (`UserNr`)
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`usernr`),
+  CONSTRAINT `userNnr` FOREIGN KEY (`usernr`) REFERENCES `user` (`usernr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,18 +53,18 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
-  `Username` varchar(48) NOT NULL,
+  `username` varchar(48) NOT NULL,
   `passwd` varchar(65) NOT NULL,
-  `UserNr` int(11) NOT NULL AUTO_INCREMENT,
+  `usernr` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(150) NOT NULL,
-  `VName` varchar(55) NOT NULL,
-  `NName` varchar(55) NOT NULL,
-  `Geburtstag` date NOT NULL,
+  `first_name` varchar(55) NOT NULL,
+  `last_name` varchar(55) NOT NULL,
+  `geburtstag` date NOT NULL,
 -- New Created 
-  `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`UserNr`),
-  UNIQUE KEY `Username_UNIQUE` (`Username`),
-  UNIQUE KEY `UserNr_UNIQUE` (`UserNr`),
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`usernr`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `usernr_UNIQUE` (`usernr`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;

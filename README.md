@@ -1,3 +1,4 @@
+
 # Welcome to Lemory
 
 Lemory is a school project create by Pascal Abt, Lukas König, Benjamin Schellmann and Nicolas Schüssling. Lemory is a Memory type learning game targeted for elementary school. 
@@ -9,7 +10,15 @@ Lemory is a school project create by Pascal Abt, Lukas König, Benjamin Schellma
 
 # About the API
 
-The API is created by Lukas König. The API is an RESTful Web Service which allows any Application supporting the HTTP protocol to access it. It provides endpoints for all needed database operations.
+The API is created by Lukas König. The API is an [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful Web Service which allows any Application supporting the HTTP protocol to access it. It provides endpoints for all needed database operations.
+
+## Built with
+
+ - TypeScript
+ - JavaScript
+ - NodeJS
+ - Express
+ - MySQL
 
 # API Doc
 
@@ -24,10 +33,10 @@ The API is created by Lukas König. The API is an RESTful Web Service which allo
 
 The Login endpoint requires a body in the following format:
 ```
-	{
-		username: <username>,
-		password: <password>
-	}
+{
+	username: <username>,
+	password: <password>
+}
 ```
 
 As a Callback you'll receive an access Token which needs to be included in the HTTP Header for every further request.
@@ -95,3 +104,7 @@ This Endpoint should be called when creating a user to let him know if his chose
 |200	|username already taken |
 
 The received status code needs to be included into the [Register Request](#register).
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE0MDY0NzU0NDYsMjA0MzMxNDQ4XX0=
+-->
