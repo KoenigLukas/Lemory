@@ -20,7 +20,7 @@ router.post('/', function (req: Request, res: Response) {
         return;
     }
 
-    sql.query(`SELECT UserNr,Username FROM user WHERE (username = ? AND passwd = ?)`,
+    sql.query(`SELECT usernr,username FROM user WHERE (username = ? AND passwd = ?)`,
         [req.body.username,req.body.password],
         (err: any, result: any, fields: any) => {
         if (err) {
@@ -34,7 +34,7 @@ router.post('/', function (req: Request, res: Response) {
         } else {
 
             // @ts-ignore
-            const token: String = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
+            const token: String = jwt.sign({id: result[0].usernr, username: result[0].username}, process.env.SECRET);
             res.status(200).send({token: token});
 
         }
