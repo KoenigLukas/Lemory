@@ -20,7 +20,7 @@ const registerSchema = {
 
 router.post('/', function(req: Request, res: Response, next) {
 
-    const validation = Joi.validate(req.body, registerSchema);
+    const validation: any = Joi.validate(req.body, registerSchema);
     if (validation.error) {
         res.status(400).send(validation.error.details[0].message);
         return;
@@ -33,14 +33,14 @@ router.post('/', function(req: Request, res: Response, next) {
 
     sql.query(`INSERT INTO user VALUES(?,?,2,?,?,?,STR_TO_DATE(?)`,
         [req.body.username, req.body.password, req.body.email, req.body.first_name, req.body.last_name, req.body.birth_date],
-        (err, result, fields) => {
+        (err: any, result: any, fields: any) => {
             if (err){
                 res.status(500).send(err.message);
             }
             else{
                 sql.query(`SELECT UserNr,Username FROM user WHERE (username = ? AND passwd = ?)`,
                     [req.body.username,req.body.password],
-                    (err, result, fields) => {
+                    (err: any, result: any, fields: any) => {
                     if (err) {
 
                         res.status(500).send(err.message);
@@ -52,7 +52,7 @@ router.post('/', function(req: Request, res: Response, next) {
                     } else {
 
                         // @ts-ignore
-                        const token = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
+                        const token: String = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
                         res.status(200).send({token: token});
 
                     }

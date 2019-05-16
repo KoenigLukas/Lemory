@@ -4,7 +4,7 @@
   "private": true,
   "author": "Lukas König",
   "scripts": {
-    "start": "app.ts"
+    "start": "server.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

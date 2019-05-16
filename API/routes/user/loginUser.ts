@@ -1,5 +1,6 @@
+import sql = require('../../db');
+
 import * as express from 'express';
-import * as sql from '../../db.js';
 import * as Joi from 'joi';
 import * as jwt from 'jsonwebtoken';
 import {Request, Response} from "express";
@@ -13,7 +14,7 @@ const loginSchema = {
 
 router.post('/', function (req: Request, res: Response) {
 
-    const validation = Joi.validate(req.body, loginSchema);
+    const validation: any = Joi.validate(req.body, loginSchema);
     if (validation.error) {
         res.status(400).send(validation.error.details[0].message);
         return;
@@ -21,7 +22,7 @@ router.post('/', function (req: Request, res: Response) {
 
     sql.query(`SELECT UserNr,Username FROM user WHERE (username = ? AND passwd = ?)`,
         [req.body.username,req.body.password],
-        (err, result, fields) => {
+        (err: any, result: any, fields: any) => {
         if (err) {
 
              res.status(500).send(err.message);
@@ -33,7 +34,7 @@ router.post('/', function (req: Request, res: Response) {
         } else {
 
             // @ts-ignore
-            const token = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
+            const token: String = jwt.sign({id: result[0].UserNr, username: result[0].Username}, process.env.SECRET);
             res.status(200).send({token: token});
 
         }
