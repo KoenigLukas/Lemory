@@ -6,7 +6,7 @@ dotenv.config();
 import registerRouter = require('./routes/user/registerUser');
 import loginRouter = require('./routes/user/loginUser');
 // import getStatsRouter = require('./routes/user/stats/getStats');
-// import putStatsRouter = require('./routes/user/stats/putStats');
+import putStatsRouter = require('./routes/user/stats/putStats');
 import usersRouter = require('./routes/users');
 
 
@@ -24,7 +24,7 @@ server.use('/api/users',usersRouter);
 server.use('/api/user/login', loginRouter);
 server.use('/api/user/register', registerRouter);
 // server.use('/api/user/stats/get', getStatsRouter);
-// server.use('/api/user/stats/put', putStatsRouter);
+server.use('/api/user/stats/put', putStatsRouter);
 
 server.listen(port, function () {
     console.log('Example server listening on port ' + port + '!');

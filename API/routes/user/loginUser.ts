@@ -35,7 +35,10 @@ router.post('/', function (req: Request, res: Response) {
 
             // @ts-ignore
             const token: String = jwt.sign({id: result[0].usernr, username: result[0].username}, process.env.SECRET);
-            res.status(200).send({token: token});
+            res.status(200).json(
+                {
+                        token: token
+                });
 
         }
     });
