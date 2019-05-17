@@ -49,6 +49,7 @@ As a Callback you'll receive an access Token which needs to be included in the H
 ### posible Statuscodes:
 |Status	|Description
 |-------|----|
+|1	|Da Schmiddi is ogstürzt|
 |200	|everything OK|
 |400	|wrong Request-Body structure|
 |404 	|wrong username or password|
