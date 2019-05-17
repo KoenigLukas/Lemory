@@ -22,7 +22,7 @@ router.post('/', function(req: Request, res: Response, next) {
 
     const validation: any = Joi.validate(req.body, registerSchema);
     if (validation.error) {
-        res.status(400).send(validation.error.details[0].message);
+        res.status(400).send({success: false, message: validation.error.details[0].message});
         return;
     }
 
@@ -35,7 +35,7 @@ router.post('/', function(req: Request, res: Response, next) {
         [req.body.username, req.body.password, req.body.email, req.body.first_name, req.body.last_name, req.body.birth_date],
         (err: any, result: any, fields: any) => {
             if (err){
-                res.status(500).send(err.message);
+                res.status(500).send({success: false, message: err.message});
             }
             else{
                 sql.query(`SELECT usernr,username FROM user WHERE (username = ? AND passwd = ?)`,
@@ -43,18 +43,19 @@ router.post('/', function(req: Request, res: Response, next) {
                     (err: any, result: any, fields: any) => {
                     if (err) {
 
-                        res.status(500).send(err.message);
+                        res.status(500).send({success: false, message: err.message});
 
                     } else if (!(result.length > 0)) {
 
-                        res.status(404).send("not found");
+                        res.status(404).send({success: false, message: "user not found"});
 
                     } else {
 
                         // @ts-ignore
                         const token: String = jwt.sign({id: result[0].usernr, username: result[0].username}, process.env.SECRET);
-                        res.status(200).json(
+                        res.status(200).send(
                             {
+                                success: true,
                                 token: token
                             });
 

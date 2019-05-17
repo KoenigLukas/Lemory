@@ -15,13 +15,14 @@ const statsSchema = {
 router.post('/', function(req: Request, res: Response, next) {
     // @ts-ignore
     if(!req.header('token')){
-        res.status(400).send("no token provided");
+        res.status(400).send({success: false, message: "no token provided"});
         return;
     }
-
-    console.log(req.header('token'));
-
-    let tokenData: any;
+    const validation: any = Joi.validate(req.body, statsSchema);
+    if (validation.error) {
+        res.status(400).send({success: false, message: validation.error.details[0].message});
+        return;
+    }
 
     // @ts-ignore
     jwt.verify(req.header('token'), process.env.SECRET, function(err: any, decoded: any) {

@@ -16,7 +16,7 @@ router.post('/', function (req: Request, res: Response) {
 
     const validation: any = Joi.validate(req.body, loginSchema);
     if (validation.error) {
-        res.status(400).send(validation.error.details[0].message);
+        res.status(400).send({success: false, message: validation.error.details[0].message});
         return;
     }
 
@@ -25,11 +25,11 @@ router.post('/', function (req: Request, res: Response) {
         (err: any, result: any, fields: any) => {
         if (err) {
 
-             res.status(500).send(err.message);
+             res.status(500).send({success: false, message: err.message});
 
         } else if (!(result.length > 0)) {
 
-            res.status(404).send("not found");
+            res.status(404).send({success: false, message: "user not found"});
 
         } else {
 
@@ -37,6 +37,7 @@ router.post('/', function (req: Request, res: Response) {
             const token: String = jwt.sign({id: result[0].usernr, username: result[0].username}, process.env.SECRET);
             res.status(200).json(
                 {
+                        success: true,
                         token: token
                 });
 
