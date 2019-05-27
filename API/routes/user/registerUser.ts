@@ -7,9 +7,11 @@ import {Request, Response} from "express";
 
 const router = express.Router();
 
+//TODO: CAHNGE user_available AND email_available TO BOOLEAN
+
 const registerSchema = {
-    user_available: Joi.number().valid('200','404').required(),
-    email_available: Joi.number().valid('200','404').required(),
+    user_available: Joi.boolean().required(),
+    email_available: Joi.boolean().required(),
     username: Joi.string().alphanum().min(3).max(15).required(),
     password: Joi.string().min(5).max(30).required(),
     email: Joi.string().email().required(),
@@ -22,12 +24,18 @@ router.post('/', function(req: Request, res: Response, next) {
 
     const validation: any = Joi.validate(req.body, registerSchema);
     if (validation.error) {
-        res.status(400).send({success: false, message: validation.error.details[0].message});
+        res.status(400).send({
+            success: false,
+            message: validation.error.details[0].message
+        });
         return;
     }
 
-    if(!(req.body.user_available && req.body.email_available) || (req.body.user_available === 200) || (req.body.user_available === 200)){
-        res.sendStatus(403);
+    if(!(req.body.user_available && req.body.email_available)){
+        res.status(403).send({
+            success: false,
+            message: "usernaem or password unavailable"
+        });
         return;
     }
 
@@ -35,7 +43,10 @@ router.post('/', function(req: Request, res: Response, next) {
         [req.body.username, req.body.password, req.body.email, req.body.first_name, req.body.last_name, req.body.birth_date],
         (err: any, result: any, fields: any) => {
             if (err){
-                res.status(500).send({success: false, message: err.message});
+                res.status(500).send({
+                    success: false,
+                    message: err.message
+                });
             }
             else{
                 sql.query(`SELECT usernr,username FROM user WHERE (username = ? AND passwd = ?)`,
@@ -43,11 +54,17 @@ router.post('/', function(req: Request, res: Response, next) {
                     (err: any, result: any, fields: any) => {
                     if (err) {
 
-                        res.status(500).send({success: false, message: err.message});
+                        res.status(500).send({
+                            success: false,
+                            message: err.message
+                        });
 
                     } else if (!(result.length > 0)) {
 
-                        res.status(404).send({success: false, message: "user not found"});
+                        res.status(200).send({
+                            success: false,
+                            message: "wrong username or password"
+                        });
 
                     } else {
 
@@ -73,11 +90,11 @@ router.get('/checkEmail/:email', function(req: Request, res: Response, next) {
 
         } else if (!(result.length > 0)) {
 
-            res.status(404).send("available");
+            res.status(200).send({success: true,available: true, message: "available"});
 
         } else {
 
-            res.status(200).send("already taken");
+            res.status(200).send({success: true,available: false, message: "not available"});
 
         }
     });
@@ -92,11 +109,11 @@ router.get('/checkUsername/:username', function(req, res, next) {
 
         } else if (!(result.length > 0)) {
 
-            res.status(404).send("available");
+            res.status(200).send({success: true,available: true, message: "available"});
 
         } else {
 
-            res.status(200).send("already taken");
+            res.status(200).send({success: true,available: false, message: "not available"});
 
         }
     });

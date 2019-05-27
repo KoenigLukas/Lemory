@@ -15,12 +15,18 @@ const statsSchema = {
 router.post('/', function(req: Request, res: Response, next) {
     // @ts-ignore
     if(!req.header('token')){
-        res.status(400).send({success: false, message: "no token provided"});
+        res.status(400).send({
+            success: false,
+            message: "no token provided"
+        });
         return;
     }
     const validation: any = Joi.validate(req.body, statsSchema);
     if (validation.error) {
-        res.status(400).send({success: false, message: validation.error.details[0].message});
+        res.status(400).send({
+            success: false,
+            message: validation.error.details[0].message
+        });
         return;
     }
 
@@ -37,9 +43,15 @@ router.post('/', function(req: Request, res: Response, next) {
                 [decoded.id,req.body.won,req.body.time],
                 (err: any, result: any, fields: any) => {
                     if(err){
-                        res.status(500).send({success: false, message: err.message});
+                        res.status(500).send({
+                            success: false,
+                            message: err.message
+                        });
                     }else{
-                        res.status(200).send({success: true, message: "successfully added"})
+                        res.status(200).send({
+                            success: true,
+                            message: "successfully added"
+                        });
                     }
             });
         }
