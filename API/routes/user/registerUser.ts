@@ -17,7 +17,7 @@ const registerSchema = {
     email: Joi.string().email().required(),
     first_name: Joi.string().min(1).required(),
     last_name: Joi.string().min(1).required(),
-    birth_date: Joi.string().regex(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+    birth_date: Joi.string().regex(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/).required()
 };
 
 router.post('/', function(req: Request, res: Response, next) {
