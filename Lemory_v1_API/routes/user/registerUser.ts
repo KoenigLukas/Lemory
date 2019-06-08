@@ -7,8 +7,6 @@ import {Request, Response} from "express";
 
 const router = express.Router();
 
-//TODO: CAHNGE user_available AND email_available TO BOOLEAN
-
 const registerSchema = {
     user_available: Joi.boolean().required(),
     email_available: Joi.boolean().required(),
