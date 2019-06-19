@@ -31,7 +31,6 @@ CREATE TABLE `stats` (
   `time` int(11) DEFAULT NULL,
 -- New Created and LastUpdate
   `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`usernr`),
   CONSTRAINT `userNnr` FOREIGN KEY (`usernr`) REFERENCES `user` (`usernr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
