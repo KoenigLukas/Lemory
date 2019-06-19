@@ -1,0 +1,13 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Login"></Label>
+</ActionBar>
+
+
+<StackLayout>
+    <TextField hint="Email Address" keyboardType="email"
+               autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField hint="Password" secure="true"></TextField>
+
+    <Button text="Sign in" (tap)="login()"></Button>
+    <Button text="Sign up for Lemory" [nsRouterLink]="['/register']"  ></Button>
+</StackLayout>

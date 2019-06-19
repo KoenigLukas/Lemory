@@ -2,19 +2,19 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
-import {LoginComponent} from "~/app/login/login.component";
-
+import { LoginComponent } from "./login.component";
+import {RegisterComponent} from "~/app/register/register.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/login", pathMatch: "full" },
-    { path: "login", component: LoginComponent },
+    { path: "", component: LoginComponent },
+    { path: "register", component: RegisterComponent },
 ];
-
 
 @NgModule({
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
 
+export class LoginRoutingModule { }
 
-export class AppRoutingModule { }
+
