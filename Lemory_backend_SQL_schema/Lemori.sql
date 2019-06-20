@@ -31,7 +31,7 @@ CREATE TABLE `stats` (
   `time` int(11) DEFAULT NULL,
 -- New Created and LastUpdate
   `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `usernr_UNIQUE` (`usernr`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
