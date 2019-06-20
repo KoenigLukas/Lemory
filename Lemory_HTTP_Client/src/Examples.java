@@ -10,9 +10,9 @@ import schemas.callbacks.LoginCallback;
 
 import java.io.IOException;
 
-public class Main {
+public class Examples {
 
-    public static void main(String[] args) {
+    public static void examples() {
 
 
         /*

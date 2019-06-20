@@ -1,6 +1,5 @@
 package requests;
 
-
 import com.google.gson.Gson;
 import exceptions.EmailNotAvailableException;
 import exceptions.UsernameNotAvailableException;
