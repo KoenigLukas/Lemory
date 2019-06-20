@@ -1,6 +1,5 @@
-import com.google.common.hash.Hashing;
-import exceptions.DateMissMatchException;
-import exceptions.EmailMissMatchException;
+import lemory.exceptions.DateMissMatchException;
+import lemory.exceptions.EmailMissMatchException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -15,11 +14,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import requests.AvailabilityCheck;
-import requests.RegisterRequest;
-import schemas.RegisterUser;
-import schemas.callbacks.LoginCallback;
-
+import lemory.requests.AvailabilityCheck;
+import lemory.requests.RegisterRequest;
+import lemory.schemas.RegisterUser;
+import lemory.schemas.callbacks.LoginCallback;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
@@ -168,8 +166,8 @@ public class Register {
                     return;
                 }
                 String birthdate= checkInDatePicker.getValue() + "";
-                registeruser3(usernamefield.getText(),Hashing.sha256().hashString(passwordfield.getText(), StandardCharsets.UTF_8).toString(),emailfield.getText(),firstnameField.getText(),lastnameField.getText(),birthdate,window);
-                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + usernamefield.getText());
+                registeruser3(usernamefield.getText(), passwordfield.getText(),emailfield.getText(),firstnameField.getText(),lastnameField.getText(),birthdate,window);
+                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "You are now registered " + usernamefield.getText());
             }
         });
     }
@@ -234,8 +232,8 @@ public class Register {
         }
         if(login.isSuccess()){
             System.out.println(login.getToken()); //LOGIN TOKEN
-            Memory memory = new Memory();
-            memory.startmemory(window);
+            Login loginpage = new Login();
+            loginpage.loginform(window);
         }
     }
 }

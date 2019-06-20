@@ -1,16 +1,22 @@
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lemory.requests.SubmitScoreRequest;
+import lemory.schemas.SubmitScore;
+import lemory.schemas.callbacks.BasicCallback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -47,6 +53,8 @@ public class GameLogic{
     }
 
     public void init(int amount){
+        Time time = new Time();
+        time.printTime();
         if(amount==0){
             closeGame();
         }
@@ -210,14 +218,37 @@ public class GameLogic{
     }
 
     public void restartorcloseGame(){
+//        Send Score
+        Time time = new Time();
+        ReadToken readToken = new ReadToken();
+        int time1 =time.readTime();
+        String token = null;
+        try {
+            token = readToken.token();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SubmitScore score = new SubmitScore(true, time1);
+        SubmitScoreRequest submitScore = new SubmitScoreRequest(score, token);
+        BasicCallback submitCallback = null;
+
+        try {
+            submitCallback = submitScore.sbumitScore();
+        } catch (IOException var17) {
+            var17.printStackTrace();
+            System.out.println("Fick di kenig");
+        }
+//        Create Window
         window = new Stage();
         window.setTitle("Restart or Close Game");
         window.setMinHeight(195);
         window.setMinWidth(300);
 
         VBox layout = new VBox(2);
+        Text howlong= new Text("How long it took you: "+time1);
         layout.setAlignment(Pos.CENTER);
         Scene scene2 = new Scene(layout,200,200);
+        layout.getChildren().add(howlong);
         //Restart Button
         Button restart = new Button();
         restart.setText("Restart Game");
@@ -228,6 +259,18 @@ public class GameLogic{
         close.setText("Close Game");
         close.setOnAction(e -> closeGame());
         layout.getChildren().add(close);
+        //Menu Button
+        Button menu = new Button();
+        menu.setText("Back To Menu");
+        menu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Menu menu1 = new Menu();
+                menu1.menuchoose(window);
+                mainwindow.close();
+            }
+        });
+        layout.getChildren().add(menu);
         //Show Window
         window.setScene(scene2);
         window.showAndWait();
