@@ -1,4 +1,4 @@
-package exceptions;
+package lemory.exceptions;
 
 public class DateMissMatchException extends Exception {
 

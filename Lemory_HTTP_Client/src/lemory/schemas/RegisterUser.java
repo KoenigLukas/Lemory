@@ -1,8 +1,8 @@
-package schemas;
+package lemory.schemas;
 
 import com.google.common.hash.Hashing;
-import exceptions.EmailMissMatchException;
-import exceptions.DateMissMatchException;
+import lemory.exceptions.EmailMissMatchException;
+import lemory.exceptions.DateMissMatchException;
 
 import java.nio.charset.StandardCharsets;
 

@@ -1,9 +1,9 @@
-package requests;
+package lemory.requests;
 
 import com.google.gson.Gson;
-import exceptions.EmailNotAvailableException;
-import exceptions.UsernameNotAvailableException;
-import schemas.callbacks.AvailabiltyCallback;
+import lemory.exceptions.EmailNotAvailableException;
+import lemory.exceptions.UsernameNotAvailableException;
+import lemory.schemas.callbacks.AvailabiltyCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
