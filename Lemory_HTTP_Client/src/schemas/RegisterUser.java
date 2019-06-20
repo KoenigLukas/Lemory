@@ -1,7 +1,10 @@
 package schemas;
 
+import com.google.common.hash.Hashing;
 import exceptions.EmailMissMatchException;
 import exceptions.DateMissMatchException;
+
+import java.nio.charset.StandardCharsets;
 
 public class RegisterUser {
 
@@ -29,7 +32,7 @@ public class RegisterUser {
         this.email_available = email_available;
         this.user_available = user_available;
         this.username = username;
-        this.password = password;
+        this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
         this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;

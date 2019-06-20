@@ -1,5 +1,9 @@
 package schemas;
 
+import com.google.common.hash.Hashing;
+
+import java.nio.charset.StandardCharsets;
+
 public class LoginUser {
 
     private String username;
@@ -7,7 +11,7 @@ public class LoginUser {
 
     public LoginUser(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();;
     }
 
     public String getUsername() {
