@@ -48,8 +48,6 @@ public class GameLogic{
 
     public void init(int amount){
         if(amount==0){
-            System.out.println(amount);
-            System.out.println("ss");
             closeGame();
         }
         this.buttons= new ArrayList<>();
@@ -70,17 +68,17 @@ public class GameLogic{
             }
         }
         //Which Player
-        wplayer.setText("Player " + "1" + " is on move");
+        wplayer.setText("Your Turn");
         wplayer.setFont(new Font("Arial",16));
         root.add(wplayer,0,6);
         //Player 1 Points
-        pPlayer1.setText("Player 1 : " + spielerg[0]);
+        pPlayer1.setText("You : " + spielerg[0]);
         pPlayer1.setFont(new Font("Arial",16));
         root.add(pPlayer1,0,0);
-        //Player 2 Points
-        pPlayer2.setText("Player 2 : " + spielerg[1]);
-        pPlayer2.setFont(new Font("Arial",16));
-        root.add(pPlayer2,((int)Math.sqrt(amount))-1,0);
+//        //Player 2 Points
+//        pPlayer2.setText("Player 2 : " + spielerg[1]);
+//        pPlayer2.setFont(new Font("Arial",16));
+//        root.add(pPlayer2,((int)Math.sqrt(amount))-1,0);
     }
 
     public GridPane getRoot() {
@@ -95,23 +93,24 @@ public class GameLogic{
         GameLogic.amount = amount;
     }
 
-    public void whichplayer(){
-        chooser = !chooser;
-        if(chooser){
-            player=1;
-        }else{
-            player=2;
-        }
-        wplayer.setText("Player " + player + " is on move");
-    }
+//    public void whichplayer(){
+//        chooser = !chooser;
+//        if(chooser){
+//            player=1;
+//        }else{
+//            player=2;
+//        }
+//        //wplayer.setText("Player " + player + " is on move");
+//    }
 
 
     public void getpoints(){
-        if(chooser){
+        if(chooser) {
             spielerg[0]++;
-        }else{
-            spielerg[1]++;
         }
+//        }else{
+//            spielerg[1]++;
+//        }
     }
 
     public void flipordelete(MemoryButton mb){
@@ -146,12 +145,12 @@ public class GameLogic{
         }
 
         //Change Player
-        if(checker==2 && samememchecker!=1 && counter != 8){
-            whichplayer();
-        }
+//        if(checker==2 && samememchecker!=1 && counter != 8){
+//            //whichplayer();
+//        }
 
         //Player 1 Points
-        pPlayer1.setText("Player 1 : " + spielerg[0]);
+        pPlayer1.setText("You : " + spielerg[0]);
 
         //Player 2 Points
         pPlayer2.setText("Player 2 : " + spielerg[1]);
@@ -166,19 +165,20 @@ public class GameLogic{
 
     public void getwinner(){
 
-        if(spielerg[0]>spielerg[1]){
-            temp=1;
-        }else if(spielerg[0]<spielerg[1]){
-            temp=2;
-        }else{
-            temp=0;
-        }
-
-        if(temp!=0){
-            winner.setText("Player " + temp + " wins!");
-        }else{
-            winner.setText("Draw");
-        }
+//        if(spielerg[0]>spielerg[1]){
+//            temp=1;
+//        }else if(spielerg[0]<spielerg[1]){
+//            temp=2;
+//        }else{
+//            temp=0;
+//        }
+//
+//        if(temp!=0){
+//            winner.setText("Player " + temp + " wins!");
+//        }else{
+//            winner.setText("Draw");
+//        }
+        winner.setText("You have won!");
         winner.setFont(new Font("Arial",16));
         root.add(winner,((int)Math.sqrt(amount))-1,((int)Math.sqrt(amount))+1);
         restartorcloseGame();
