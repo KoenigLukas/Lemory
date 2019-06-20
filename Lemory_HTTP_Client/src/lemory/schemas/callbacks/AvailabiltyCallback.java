@@ -1,4 +1,4 @@
-package schemas.callbacks;
+package lemory.schemas.callbacks;
 
 public class AvailabiltyCallback {
 

@@ -1,50 +1,43 @@
-package requests;
+package lemory.requests;
 
 import com.google.gson.Gson;
-import exceptions.EmailNotAvailableException;
-import exceptions.UsernameNotAvailableException;
+import lemory.schemas.SubmitScore;
+import lemory.schemas.callbacks.BasicCallback;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import schemas.RegisterUser;
-import schemas.callbacks.LoginCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-public class RegisterRequest {
+public class SubmitScoreRequest {
 
     private final String USER_AGENT = "Mozilla/5.0";
-    private RegisterUser user;
     private Gson gson = new Gson();
+    private SubmitScore score;
+    private String token;
 
-    public RegisterRequest(RegisterUser user) throws Exception {
-        this.user = user;
-
-        if(!user.isEmail_available()){
-            throw new EmailNotAvailableException("Email not Available");
-        }
-        if(!user.isUser_available()){
-            throw new UsernameNotAvailableException("Username not Available");
-        }
+    public SubmitScoreRequest(SubmitScore score, String token) {
+        this.score = score;
+        this.token = token;
     }
 
-    public LoginCallback registerUser() throws IOException {
+    public BasicCallback sbumitScore() throws IOException {
 
-        String url = "http://185.168.8.159:3001/api/v1/user/register";
+        String url = "http://185.168.8.159:3001/api/v1/user/stats/put";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
         post.setHeader("User-Agent", USER_AGENT);
+        post.setHeader("token",token);
         post.addHeader("content-type", "application/json");
 
-        StringEntity params = new StringEntity(gson.toJson(user),ContentType.APPLICATION_JSON);
+        StringEntity params = new StringEntity(gson.toJson(score), ContentType.APPLICATION_JSON);
 
         post.setEntity(params);
 
@@ -59,9 +52,9 @@ public class RegisterRequest {
             result.append(line);
         }
 
-        LoginCallback login = gson.fromJson(result.toString(), LoginCallback.class);
+        BasicCallback callback = gson.fromJson(result.toString(), BasicCallback.class);
 
-        return login;
+        return callback;
 
     }
 

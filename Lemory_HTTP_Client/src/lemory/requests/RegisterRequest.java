@@ -1,31 +1,42 @@
-package requests;
+package lemory.requests;
 
 import com.google.gson.Gson;
+import lemory.exceptions.EmailNotAvailableException;
+import lemory.exceptions.UsernameNotAvailableException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import schemas.LoginUser;
-import schemas.callbacks.LoginCallback;
+import lemory.schemas.RegisterUser;
+import lemory.schemas.callbacks.LoginCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class LoginRequest {
+
+public class RegisterRequest {
 
     private final String USER_AGENT = "Mozilla/5.0";
-    private LoginUser user;
+    private RegisterUser user;
     private Gson gson = new Gson();
 
-    public LoginRequest(LoginUser user) {
+    public RegisterRequest(RegisterUser user) throws Exception {
         this.user = user;
+
+        if(!user.isEmail_available()){
+            throw new EmailNotAvailableException("Email not Available");
+        }
+        if(!user.isUser_available()){
+            throw new UsernameNotAvailableException("Username not Available");
+        }
     }
 
-    public LoginCallback loginUser() throws IOException {
+    public LoginCallback registerUser() throws IOException {
 
-        String url = "http://185.168.8.159:3001/api/v1/user/login";
+        String url = "http://185.168.8.159:3001/api/v1/user/register";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -33,7 +44,7 @@ public class LoginRequest {
         post.setHeader("User-Agent", USER_AGENT);
         post.addHeader("content-type", "application/json");
 
-        StringEntity params = new StringEntity(gson.toJson(user));
+        StringEntity params = new StringEntity(gson.toJson(user),ContentType.APPLICATION_JSON);
 
         post.setEntity(params);
 
@@ -53,4 +64,5 @@ public class LoginRequest {
         return login;
 
     }
+
 }
