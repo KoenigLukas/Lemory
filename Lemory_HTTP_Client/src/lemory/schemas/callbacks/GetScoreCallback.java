@@ -1,20 +1,20 @@
 package lemory.schemas.callbacks;
 
-public class GetStatsCallback {
+public class GetScoreCallback {
 
     private boolean success;
     private String message;
     private int won;
     private int time;
 
-    public GetStatsCallback(boolean success, String message) {
+    public GetScoreCallback(boolean success, String message) {
         this.success = success;
         this.message = message;
         this.won = 0;
         this.time = 0;
     }
 
-    public GetStatsCallback(boolean success, int won, int time) {
+    public GetScoreCallback(boolean success, int won, int time) {
         this.success = success;
         this.won = won;
         this.time = time;

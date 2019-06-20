@@ -2,11 +2,12 @@ package lemory;
 
 import lemory.exceptions.DateMissMatchException;
 import lemory.exceptions.EmailMissMatchException;
-import lemory.requests.AvailabilityCheck;
-import lemory.requests.LoginRequest;
-import lemory.requests.RegisterRequest;
+import lemory.requests.*;
 import lemory.schemas.LoginUser;
 import lemory.schemas.RegisterUser;
+import lemory.schemas.SubmitScore;
+import lemory.schemas.callbacks.BasicCallback;
+import lemory.schemas.callbacks.GetScoreCallback;
 import lemory.schemas.callbacks.LoginCallback;
 
 import java.io.IOException;
@@ -87,6 +88,48 @@ public class Examples {
         if(loginCallback.isSuccess()){
             System.out.println(loginCallback.getToken()); //LOGIN TOKEN
         }
+
+        /*
+               Submit Score
+         */
+
+        String token = "token"; //TOKEN RECEIVED FORM LOGIN
+
+        SubmitScore score = new SubmitScore(true,123);
+
+        SubmitScoreRequest submitScore = new SubmitScoreRequest(score, token);
+
+        BasicCallback submitCallback = null;
+        try {
+            submitCallback = submitScore.sbumitScore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Success:"+submitCallback.isSuccess() + " Message:" + submitCallback.getMessage());
+
+
+        /*
+            Get Score
+         */
+
+        GetScoreRequest scoreRequest = new GetScoreRequest("token");
+
+        GetScoreCallback getScoreCallback = null;
+
+        try {
+            getScoreCallback = scoreRequest.getScore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(!getScoreCallback.isSuccess()){
+            System.out.println("Success:"+getScoreCallback.isSuccess()+" Message:"+getScoreCallback.getMessage());
+        }
+        else{
+            System.out.println("Success:"+getScoreCallback.isSuccess()+" Win percentage:"+getScoreCallback.getWon()+" Average Time:"+getScoreCallback.getTime());
+        }
+
 
     }
 

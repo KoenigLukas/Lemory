@@ -1,34 +1,29 @@
 package lemory.requests;
 
 import com.google.gson.Gson;
-import lemory.schemas.SubmitScore;
-import lemory.schemas.callbacks.BasicCallback;
+import lemory.schemas.callbacks.GetScoreCallback;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class SubmitScoreRequest {
+public class GetScoreRequest {
 
     private final String USER_AGENT = "Mozilla/5.0";
     private Gson gson = new Gson();
-    private SubmitScore score;
     private String token;
 
-    public SubmitScoreRequest(SubmitScore score, String token) {
-        this.score = score;
+    public GetScoreRequest(String token) {
         this.token = token;
     }
 
-    public BasicCallback sbumitScore() throws IOException {
+    public GetScoreCallback getScore() throws IOException {
 
-        String url = "http://185.168.8.159:3001/api/v1/user/stats/put";
+        String url = "http://185.168.8.159:3001/api/v1/user/stats/get";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -36,10 +31,6 @@ public class SubmitScoreRequest {
         post.setHeader("User-Agent", USER_AGENT);
         post.setHeader("token",token);
         post.addHeader("content-type", "application/json");
-
-        StringEntity params = new StringEntity(gson.toJson(score), ContentType.APPLICATION_JSON);
-
-        post.setEntity(params);
 
         HttpResponse response = client.execute(post);
         response.getStatusLine().getStatusCode();
@@ -52,7 +43,7 @@ public class SubmitScoreRequest {
             result.append(line);
         }
 
-        BasicCallback callback = gson.fromJson(result.toString(), BasicCallback.class);
+        GetScoreCallback callback = gson.fromJson(result.toString(), GetScoreCallback.class);
 
         return callback;
 
