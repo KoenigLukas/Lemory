@@ -26,7 +26,7 @@ router.post('/', function(req: Request, res: Response, next) {
             });
         }
         else{
-            sql.query(`SELECT AVG(won::int::float4) AS avgwon, AVG(time) AS avgtime FROM stats WHERE usernr = ?`,
+            sql.query(`SELECT AVG(CASE WHEN  won = TRUE THEN 1 ELSE 0 END) AS avgwon, AVG(time) AS avgtime FROM stats WHERE usernr = ?`,
                 [decoded.id],
                 (err: any, result: any, fields: any) => {
                     if(err){

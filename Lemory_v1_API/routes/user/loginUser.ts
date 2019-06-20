@@ -9,7 +9,7 @@ const router = express.Router();
 
 const loginSchema = {
     username: Joi.string().alphanum().min(3).max(15).required(),
-    password: Joi.string().min(5).max(30).required()
+    password: Joi.string().min(5).max(64).required()
 };
 
 router.post('/', function (req: Request, res: Response) {

@@ -1,4 +1,3 @@
-import com.google.common.hash.Hashing;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,12 +12,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import requests.LoginRequest;
-import schemas.LoginUser;
-import schemas.callbacks.LoginCallback;
-
+import lemory.requests.LoginRequest;
+import lemory.schemas.LoginUser;
+import lemory.schemas.callbacks.LoginCallback;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+
 
 
 public class Login {
@@ -88,7 +88,7 @@ public class Login {
     }
 
     private void checklog(String username,String password,Stage window) {
-        password= Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+        password= password;
         LoginUser loginUser = new LoginUser(username, password);
 
         LoginRequest loginRequest = new LoginRequest(loginUser);
@@ -107,8 +107,19 @@ public class Login {
         }
         if (loginCallback.isSuccess()) {
             System.out.println(loginCallback.getToken()); //LOGIN TOKEN
-            Memory memory = new Memory();
-            memory.startmemory(window);
+            printtoken(loginCallback.getToken());
+//            Memory memory = new Memory();
+//            memory.startmemory(window);
+            Menu menu = new Menu();
+            menu.menuchoose(window);
         }
     }
+    private void printtoken(String token){
+        try (BufferedWriter br= new BufferedWriter(new FileWriter("token.nigga"))){
+            br.write(token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
