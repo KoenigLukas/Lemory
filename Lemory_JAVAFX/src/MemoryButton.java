@@ -14,11 +14,15 @@ public class MemoryButton extends Button implements EventHandler<ActionEvent> {
     GameLogic gl = new GameLogic();
     ImageView imgv;
     ImageView back;
+    String text;
+    String[] arr = {"Deutsch","Mathe","Geschichte","Sport","Englisch","Informatik","Zeichnen","Religion"};
     public MemoryButton(int identification) {
         this.id = identification;
         this.visible = true;
-        imgv=new ImageView("./Images/" + String.valueOf(this.id) + ".png");
-        back=new ImageView("./Images/back.png");
+        this.text=arr[id];
+//        imgv=new ImageView("./Images/" + String.valueOf(this.id) + ".png");
+            back=new ImageView("./Images/back.png");
+
     }
 
     public boolean getvisible() {
@@ -28,9 +32,11 @@ public class MemoryButton extends Button implements EventHandler<ActionEvent> {
     public void flip() {
         this.visible = !visible;
         if(visible){
-            this.setGraphic(imgv);
+            this.setGraphic(null);
+            this.setText(text);
         }else{
             this.setGraphic(back);
+            this.setText("");
         }
     }
 
