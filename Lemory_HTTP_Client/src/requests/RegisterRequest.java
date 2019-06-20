@@ -6,6 +6,7 @@ import exceptions.UsernameNotAvailableException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import schemas.RegisterUser;
@@ -35,15 +36,15 @@ public class RegisterRequest {
 
     public LoginCallback registerUser() throws IOException {
 
-        String url = "https://185.168.8.159:3001/api/v1/user/register";
+        String url = "http://185.168.8.159:3001/api/v1/user/register";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
         post.setHeader("User-Agent", USER_AGENT);
-        post.addHeader("content-type", "application/x-www-form-urlencoded");
+        post.addHeader("content-type", "application/json");
 
-        StringEntity params = new StringEntity(gson.toJson(user));
+        StringEntity params = new StringEntity(gson.toJson(user),ContentType.APPLICATION_JSON);
 
         post.setEntity(params);
 

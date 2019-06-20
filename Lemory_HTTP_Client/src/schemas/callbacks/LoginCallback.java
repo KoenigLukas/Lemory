@@ -2,13 +2,13 @@ package schemas.callbacks;
 
 public class LoginCallback {
 
-    private boolean sucess;
+    private boolean success;
     private String token;
     private String message;
 
-    public LoginCallback(boolean sucess, String string) {
-        this.sucess = sucess;
-        if(sucess){
+    public LoginCallback(boolean success, String string) {
+        this.success = success;
+        if(success){
             this.token = string;
             this.message = null;
         }
@@ -18,8 +18,8 @@ public class LoginCallback {
         }
     }
 
-    public boolean isSucess() {
-        return sucess;
+    public boolean isSuccess() {
+        return success;
     }
 
     public String getToken() {
@@ -29,4 +29,5 @@ public class LoginCallback {
     public String getMessage() {
         return message;
     }
+
 }
