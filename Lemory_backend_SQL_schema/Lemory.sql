@@ -18,7 +18,7 @@ CREATE TABLE `stats` (
   `usernr` int(11) NOT NULL,
   `won` boolean DEFAULT FALSE,
   `time` int(11) DEFAULT NULL,
-  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 --
