@@ -18,7 +18,7 @@ public class AvailabilityCheck {
 
     public boolean checkEmail(String email) throws Exception {
 
-        String url = "https://185.168.8.159:3001/api/v1/user/register/checkEmail/"+email;
+        String url = "http://185.168.8.159:3001/api/v1/user/register/checkEmail/"+email;
 
 
         URL obj = new URL(url);
@@ -56,7 +56,7 @@ public class AvailabilityCheck {
 
     public boolean checkUsername(String username) throws Exception {
 
-        String url = "https://185.168.8.159:3001/api/v1/user/register/checkEmail/"+username;
+        String url = "http://185.168.8.159:3001/api/v1/user/register/checkEmail/"+username;
 
 
         URL obj = new URL(url);
@@ -88,7 +88,7 @@ public class AvailabilityCheck {
             throw new UsernameNotAvailableException("Username not available");
         }
 
-        return available.isAvailable();
+        return true;
 
     }
 

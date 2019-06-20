@@ -25,13 +25,13 @@ public class LoginRequest {
 
     public LoginCallback loginUser() throws IOException {
 
-        String url = "https://185.168.8.159:3001/api/v1/user/login";
+        String url = "http://185.168.8.159:3001/api/v1/user/login";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
         post.setHeader("User-Agent", USER_AGENT);
-        post.addHeader("content-type", "application/x-www-form-urlencoded");
+        post.addHeader("content-type", "application/json");
 
         StringEntity params = new StringEntity(gson.toJson(user));
 
