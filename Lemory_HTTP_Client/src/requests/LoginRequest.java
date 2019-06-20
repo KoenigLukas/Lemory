@@ -1,42 +1,31 @@
 package requests;
 
-
 import com.google.gson.Gson;
-import exceptions.EmailNotAvailableException;
-import exceptions.UsernameNotAvailableException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import schemas.RegisterUser;
+import schemas.LoginUser;
 import schemas.callbacks.LoginCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-public class RegisterRequest {
+public class LoginRequest {
 
     private final String USER_AGENT = "Mozilla/5.0";
-    private RegisterUser user;
+    private LoginUser user;
     private Gson gson = new Gson();
 
-    public RegisterRequest(RegisterUser user) throws Exception {
+    public LoginRequest(LoginUser user) {
         this.user = user;
-
-        if(!user.isEmail_available()){
-            throw new EmailNotAvailableException("Email not Available");
-        }
-        if(!user.isUser_available()){
-            throw new UsernameNotAvailableException("Username not Available");
-        }
     }
 
-    public LoginCallback registerUser() throws IOException {
+    public LoginCallback loginUser() throws IOException {
 
-        String url = "https://185.168.8.159:3001/api/v1/user/register";
+        String url = "https://185.168.8.159:3001/api/v1/user/login";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -64,5 +53,4 @@ public class RegisterRequest {
         return login;
 
     }
-
 }
