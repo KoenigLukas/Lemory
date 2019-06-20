@@ -11,7 +11,7 @@ const registerSchema = {
     user_available: Joi.boolean().required(),
     email_available: Joi.boolean().required(),
     username: Joi.string().alphanum().min(3).max(15).required(),
-    password: Joi.string().min(5).max(30).required(),
+    password: Joi.string().min(5).max(64).required(),
     email: Joi.string().email().required(),
     first_name: Joi.string().min(1).required(),
     last_name: Joi.string().min(1).required(),
