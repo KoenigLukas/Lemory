@@ -10,7 +10,7 @@ Lemory is a school project create by Pascal Abt, Lukas König, Benjamin Schellma
 The API is an [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful Web Service which allows any Application supporting the HTTP protocol to access it. It provides endpoints for all needed database operations. The API was built with NodeJS and TypeScript for better Syntax releiability. To create and easy to use Webservice ExpressJS was used. 
 
 -built by Lukas König
-
+-databese design by Nicolas Schüssling
 
 # The Java Lemory HTTP Client 
 
