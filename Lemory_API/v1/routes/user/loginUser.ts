@@ -1,4 +1,4 @@
-import sql = require('../../db');
+import sql = require('../../../../db');
 
 import * as express from 'express';
 import * as Joi from 'joi';
