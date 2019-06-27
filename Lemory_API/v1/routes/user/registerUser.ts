@@ -1,5 +1,5 @@
 import * as express from 'express';
-import sql = require('../../db');
+import sql = require('../../../db');
 
 import * as Joi from 'joi';
 import * as jwt from 'jsonwebtoken';
@@ -32,7 +32,7 @@ router.post('/', function(req: Request, res: Response, next) {
     if(!(req.body.user_available && req.body.email_available)){
         res.status(403).send({
             success: false,
-            message: "usernaem or password unavailable"
+            message: "username or password unavailable"
         });
         return;
     }

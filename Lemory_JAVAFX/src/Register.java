@@ -230,6 +230,7 @@ public class Register {
         if(!login.isSuccess()){
             System.out.println(login.getMessage()); //ERROR MESSAGE
         }
+        
         if(login.isSuccess()){
             System.out.println(login.getToken()); //LOGIN TOKEN
             Login loginpage = new Login();

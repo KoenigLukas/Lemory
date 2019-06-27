@@ -1,6 +1,7 @@
 package lemory.requests;
 
 import com.google.gson.Gson;
+import lemory.schemas.callbacks.BasicCallback;
 import lemory.schemas.callbacks.GetScoreCallback;
 
 import java.io.BufferedReader;
@@ -9,24 +10,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GetScoreRequest {
+public class DeleteStatsRequest {
 
     private final String USER_AGENT = "Mozilla/5.0";
     private Gson gson = new Gson();
     private String token;
 
-    public GetScoreRequest(String token) {
+    public DeleteStatsRequest(String token) {
         this.token = token;
     }
 
-    public GetScoreCallback getScore() throws IOException {
+    public BasicCallback deleteStats() throws IOException {
 
-        String url = "http://185.168.8.159:3001/api/v1/user/stats/get";
+        String url = "http://185.168.8.159:3001/api/v1/user/stats/reset";
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-        con.setRequestMethod("GET");
+        con.setRequestMethod("DELETE");
 
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("token", token);
@@ -43,10 +44,9 @@ public class GetScoreRequest {
         }
         in.close();
 
-        GetScoreCallback callback = gson.fromJson(response.toString(), GetScoreCallback.class);
+        BasicCallback callback = gson.fromJson(response.toString(), BasicCallback.class);
 
         return callback;
 
     }
-
 }

@@ -1,13 +1,13 @@
 import * as express from 'express';
 
-import sql = require('../../../db');
-import * as Joi from 'joi';
+import sql = require('../../../../db');
 import * as jwt from 'jsonwebtoken';
 import {Request, Response} from "express";
 
 const router = express.Router();
 
-router.post('/', function(req: Request, res: Response, next) {
+router.delete('/', function(req, res, next) {
+
     // @ts-ignore
     if(!req.header('token')){
         res.status(400).send({
@@ -26,7 +26,7 @@ router.post('/', function(req: Request, res: Response, next) {
             });
         }
         else{
-            sql.query(`SELECT AVG(CASE WHEN  won = TRUE THEN 1 ELSE 0 END) AS avgwon, AVG(time) AS avgtime FROM stats WHERE usernr = ?`,
+            sql.query(`DELETE FROM stats WHERE usernr = ?`,
                 [decoded.id],
                 (err: any, result: any, fields: any) => {
                     if(err){
@@ -37,16 +37,14 @@ router.post('/', function(req: Request, res: Response, next) {
                     }else{
                         res.status(200).send({
                             success: true,
-                            won: result[0].avgwon,
-                            time: result[0].avgtime
+                            message: "successfully deleted"
                         });
                     }
                 });
         }
     });
+
 });
-
-
 
 
 export = router;

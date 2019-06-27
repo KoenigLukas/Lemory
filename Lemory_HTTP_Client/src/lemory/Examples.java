@@ -6,9 +6,7 @@ import lemory.requests.*;
 import lemory.schemas.LoginUser;
 import lemory.schemas.RegisterUser;
 import lemory.schemas.SubmitScore;
-import lemory.schemas.callbacks.BasicCallback;
-import lemory.schemas.callbacks.GetScoreCallback;
-import lemory.schemas.callbacks.LoginCallback;
+import lemory.schemas.callbacks.*;
 
 import java.io.IOException;
 
@@ -25,53 +23,55 @@ public class Examples {
             REGISTER USER
          */
 
-        AvailabilityCheck check = new AvailabilityCheck();
-
-        boolean email_available = false;
-        boolean username_available = false;
-        try {
-            email_available = check.checkEmail("tes34t@test.com");
-            username_available = check.checkUsername("Hanz");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RegisterUser registerUser = null;
-        try {
-
-             registerUser = new RegisterUser(email_available, username_available,"Hans","12390","tes34t@test.com","hugo","heinz","2001-12-31");
-        } catch (EmailMissMatchException e) {
-            e.printStackTrace();
-        } catch (DateMissMatchException e) {
-            e.printStackTrace();
-        }
-
-        RegisterRequest register = null;
-        try {
-            register = new RegisterRequest(registerUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        LoginCallback registerCallback = null;
-        try {
-            registerCallback = register.registerUser();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(!registerCallback.isSuccess()){
-            System.out.println(registerCallback.getMessage()); //ERROR MESSAGE
-        }
-        if(registerCallback.isSuccess()){
-            System.out.println(registerCallback.getToken()); //LOGIN TOKEN
-        }
+//        AvailabilityCheckRequest check = new AvailabilityCheckRequest();
+//
+//        boolean email_available = false;
+//        boolean username_available = false;
+//        try {
+//            email_available = check.checkEmail("tes34t@test.com");
+//            username_available = check.checkUsername("Hanz");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        RegisterUser registerUser = null;
+//        try {
+//
+//             registerUser = new RegisterUser(email_available, username_available,"Hans","12390","tes34t@test.com","hugo","heinz","2001-12-31");
+//        } catch (EmailMissMatchException e) {
+//            e.printStackTrace();
+//        } catch (DateMissMatchException e) {
+//            e.printStackTrace();
+//        }
+//
+//        RegisterRequest register = null;
+//        try {
+//            register = new RegisterRequest(registerUser);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        LoginCallback registerCallback = null;
+//        try {
+//            registerCallback = register.registerUser();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        if(!registerCallback.isSuccess()){
+//            System.out.println(registerCallback.getMessage()); //ERROR MESSAGE
+//        }
+//        if(registerCallback.isSuccess()){
+//            System.out.println(registerCallback.getToken()); //LOGIN TOKEN
+//        }
 
         /*
             LOGIN USER
          */
+        String token = null;
 
-        LoginUser loginUser = new LoginUser("Hans","12390");
+
+        LoginUser loginUser = new LoginUser("fickluki","fickluki");
 
         LoginRequest loginRequest = new LoginRequest(loginUser);
 
@@ -87,13 +87,14 @@ public class Examples {
         }
         if(loginCallback.isSuccess()){
             System.out.println(loginCallback.getToken()); //LOGIN TOKEN
+            token = loginCallback.getToken();
         }
 
         /*
                Submit Score
          */
 
-        String token = "token"; //TOKEN RECEIVED FORM LOGIN
+        //TOKEN RECEIVED FORM LOGIN
 
         SubmitScore score = new SubmitScore(true,123);
 
@@ -113,7 +114,7 @@ public class Examples {
             Get Score
          */
 
-        GetScoreRequest scoreRequest = new GetScoreRequest("token");
+        GetScoreRequest scoreRequest = new GetScoreRequest(token);
 
         GetScoreCallback getScoreCallback = null;
 
@@ -130,6 +131,66 @@ public class Examples {
             System.out.println("Success:"+getScoreCallback.isSuccess()+" Win percentage:"+getScoreCallback.getWon()+" Average Time:"+getScoreCallback.getTime());
         }
 
+
+        /*
+            Get Times Played
+         */
+
+        GetTimesPlayedRequest timesPlayedRequest = new GetTimesPlayedRequest(token);
+
+        GetTimesPlayedCallback timesPlayedCallback = null;
+
+
+        try {
+            timesPlayedCallback = timesPlayedRequest.getTimesPlayed();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        if(!getScoreCallback.isSuccess()){
+            System.out.println("Success:"+timesPlayedCallback.isSuccess()+" Message:"+timesPlayedCallback.getMessage());
+        }
+        else{
+            System.out.println("Success:"+timesPlayedCallback.isSuccess()+" Times Played:"+timesPlayedCallback.getPlayed());
+        }
+
+
+        /*
+            Get Best Time
+         */
+
+        GetBestTimeRequest bestTimeRequest = new GetBestTimeRequest(token);
+
+        GetBestTimeCallback bestTimeCallback = null;
+
+        try {
+            bestTimeCallback = bestTimeRequest.getBestTime();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(!getScoreCallback.isSuccess()){
+            System.out.println("Success:"+bestTimeCallback.isSuccess()+" Message:"+bestTimeCallback.getMessage());
+        }
+        else{
+            System.out.println("Success:"+bestTimeCallback.isSuccess()+" Best Time:"+bestTimeCallback.getTime());
+        }
+
+        /*
+             RESET STATS
+         */
+
+        DeleteStatsRequest deleteStatsRequest = new DeleteStatsRequest(token);
+
+        BasicCallback deleteSubmitCallback = null;
+        try {
+            deleteSubmitCallback = deleteStatsRequest.deleteStats();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Success:"+deleteSubmitCallback.isSuccess()+" Message:"+deleteSubmitCallback.getMessage());
 
     }
 
