@@ -3,6 +3,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -69,6 +70,8 @@ public class Menu {
             System.out.println("Success:"+getScoreCallback.isSuccess()+" Win percentage:"+getScoreCallback.getWon()+" Average Time:"+getScoreCallback.getTime());
             time.setText(""+getScoreCallback.getTime());
         }
+
+
 
 
 //        Add Labes To Hbox & adds Hbox to vb

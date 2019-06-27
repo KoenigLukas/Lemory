@@ -265,8 +265,8 @@ public class GameLogic{
         menu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Menu menu1 = new Menu();
-                menu1.menuchoose(window);
+                Remenu remenu = new Remenu();
+                remenu.choosemenu(window);
                 mainwindow.close();
             }
         });

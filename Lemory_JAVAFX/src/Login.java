@@ -108,10 +108,11 @@ public class Login {
         if (loginCallback.isSuccess()) {
             System.out.println(loginCallback.getToken()); //LOGIN TOKEN
             printtoken(loginCallback.getToken());
-//            Memory memory = new Memory();
-//            memory.startmemory(window);
-            Menu menu = new Menu();
-            menu.menuchoose(window);
+
+//            Menu menu = new Menu();
+//            menu.menuchoose(window);
+            Remenu remenu = new Remenu();
+            remenu.choosemenu(window);
         }
     }
     private void printtoken(String token){

@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import lemory.requests.AvailabilityCheck;
+import lemory.requests.AvailabilityCheckRequest;
 import lemory.requests.RegisterRequest;
 import lemory.schemas.RegisterUser;
 import lemory.schemas.callbacks.LoginCallback;
@@ -188,7 +188,7 @@ public class Register {
 
 
     private void registeruser3(String username, String password,String email,String first_name,String last_name,String birth_date,Stage window){
-        AvailabilityCheck check = new AvailabilityCheck();
+        AvailabilityCheckRequest check = new AvailabilityCheckRequest();
 
         boolean email_available = false;
         try {

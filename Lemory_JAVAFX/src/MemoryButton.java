@@ -2,9 +2,7 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 
 import static java.lang.Thread.sleep;
 
@@ -20,8 +18,8 @@ public class MemoryButton extends Button implements EventHandler<ActionEvent> {
         this.id = identification;
         this.visible = true;
         this.text=arr[id];
-//        imgv=new ImageView("./Images/" + String.valueOf(this.id) + ".png");
-            back=new ImageView("./Images/back.png");
+//        imgv=new ImageView("./images/" + String.valueOf(this.id) + ".png");
+            back=new ImageView("images/back.png");
 
     }
 
