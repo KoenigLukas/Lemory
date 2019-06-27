@@ -4,8 +4,8 @@ public class GetScoreCallback {
 
     private boolean success;
     private String message;
-    private int won;
-    private int time;
+    private float won;
+    private float time;
 
     public GetScoreCallback(boolean success, String message) {
         this.success = success;
@@ -29,11 +29,11 @@ public class GetScoreCallback {
         return message;
     }
 
-    public int getWon() {
+    public float getWon() {
         return won;
     }
 
-    public int getTime() {
+    public float getTime() {
         return time;
     }
 }

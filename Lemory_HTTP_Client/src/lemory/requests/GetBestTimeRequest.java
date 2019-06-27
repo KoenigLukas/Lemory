@@ -33,6 +33,7 @@ public class GetBestTimeRequest {
         con.setRequestMethod("GET");
 
         con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("token", token);
 
 
         int responseCode = con.getResponseCode();

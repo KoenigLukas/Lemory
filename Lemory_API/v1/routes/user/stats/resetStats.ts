@@ -6,7 +6,7 @@ import {Request, Response} from "express";
 
 const router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.delete('/', function(req, res, next) {
 
     // @ts-ignore
     if(!req.header('token')){
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
             });
         }
         else{
-            sql.query(`SELECT AVG(CASE WHEN  won = TRUE THEN 1 ELSE 0 END) AS avgwon, AVG(time) AS avgtime FROM stats WHERE usernr = ?`,
+            sql.query(`DELETE FROM stats WHERE usernr = ?`,
                 [decoded.id],
                 (err: any, result: any, fields: any) => {
                     if(err){
@@ -37,8 +37,7 @@ router.get('/', function(req, res, next) {
                     }else{
                         res.status(200).send({
                             success: true,
-                            won: result[0].avgwon,
-                            time: result[0].avgtime
+                            message: "successfully deleted"
                         });
                     }
                 });

@@ -9,6 +9,8 @@ import v1getStatsRouter = require('./v1/routes/user/stats/getStats');
 import v1putStatsRouter = require('./v1/routes/user/stats/putStats');
 import v1getBestTimeRouter = require('./v1/routes/user/stats/getBestTime');
 import v1getNumPlayedGamesRouter = require('./v1/routes/user/stats/getTimesPlayed');
+import v1resetStatsRouter = require('./v1/routes/user/stats/resetStats');
+
 
 
 
@@ -29,7 +31,7 @@ server.use('/api/v1/user/stats/get', v1getStatsRouter);
 server.use('/api/v1/user/stats/put', v1putStatsRouter);
 server.use('/api/v1/user/stats/getbesttime', v1getBestTimeRouter);
 server.use('/api/v1/user/stats/gettimesplayed', v1getNumPlayedGamesRouter);
-
+server.use('/api/v1/user/stats/reset', v1resetStatsRouter);
 
 
 

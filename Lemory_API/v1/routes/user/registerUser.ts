@@ -32,7 +32,7 @@ router.post('/', function(req: Request, res: Response, next) {
     if(!(req.body.user_available && req.body.email_available)){
         res.status(403).send({
             success: false,
-            message: "usernaem or password unavailable"
+            message: "username or password unavailable"
         });
         return;
     }
