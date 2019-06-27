@@ -6,9 +6,7 @@ import lemory.requests.*;
 import lemory.schemas.LoginUser;
 import lemory.schemas.RegisterUser;
 import lemory.schemas.SubmitScore;
-import lemory.schemas.callbacks.BasicCallback;
-import lemory.schemas.callbacks.GetScoreCallback;
-import lemory.schemas.callbacks.LoginCallback;
+import lemory.schemas.callbacks.*;
 
 import java.io.IOException;
 
@@ -25,7 +23,7 @@ public class Examples {
             REGISTER USER
          */
 
-        AvailabilityCheck check = new AvailabilityCheck();
+        AvailabilityCheckRequest check = new AvailabilityCheckRequest();
 
         boolean email_available = false;
         boolean username_available = false;
@@ -130,6 +128,51 @@ public class Examples {
             System.out.println("Success:"+getScoreCallback.isSuccess()+" Win percentage:"+getScoreCallback.getWon()+" Average Time:"+getScoreCallback.getTime());
         }
 
+
+        /*
+            Get Times Played
+         */
+
+        GetTimesPlayedRequest timesPlayedRequest = new GetTimesPlayedRequest("token");
+
+        GetTimesPlayedCallback timesPlayedCallback = null;
+
+
+        try {
+            timesPlayedCallback = timesPlayedRequest.getTimesPlayed();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        if(!getScoreCallback.isSuccess()){
+            System.out.println("Success:"+timesPlayedCallback.isSuccess()+" Message:"+timesPlayedCallback.getMessage());
+        }
+        else{
+            System.out.println("Success:"+timesPlayedCallback.isSuccess()+" Times Played:"+timesPlayedCallback.getPlayed());
+        }
+
+
+        /*
+            Get Best Time
+         */
+
+        GetBestTimeRequest bestTimeRequest = new GetBestTimeRequest("token");
+
+        GetBestTimeCallback bestTimeCallback = null;
+
+        try {
+            bestTimeCallback = bestTimeRequest.getBestTime();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(!getScoreCallback.isSuccess()){
+            System.out.println("Success:"+bestTimeCallback.isSuccess()+" Message:"+bestTimeCallback.getMessage());
+        }
+        else{
+            System.out.println("Success:"+bestTimeCallback.isSuccess()+" Best Time:"+bestTimeCallback.getTime());
+        }
 
     }
 
