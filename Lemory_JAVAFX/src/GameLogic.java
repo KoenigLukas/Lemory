@@ -130,7 +130,7 @@ public class GameLogic{
             checker++;
         }
         if(checker>=2) {
-            if (buttonflipped[0].getIdentification() == buttonflipped[1].getIdentification()) {
+            if ((buttonflipped[0].getIdentification() == buttonflipped[1].getIdentification())&& buttonflipped[0]!=buttonflipped[1]) {
                 getpoints();
                 counter++;
                 buttonflipped[0]=null;

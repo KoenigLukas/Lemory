@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import javafx.application.Application;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -15,7 +16,9 @@ import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import lemory.requests.DeleteStatsRequest;
+import lemory.requests.GetScoreRequest;
 import lemory.schemas.callbacks.BasicCallback;
+import lemory.schemas.callbacks.GetScoreCallback;
 
 public class Remenu {
 
@@ -147,7 +150,42 @@ public class Remenu {
 
                             System.out.println("Success:"+deleteSubmitCallback.isSuccess()+" Message:"+deleteSubmitCallback.getMessage());
                             break;
-                    case 3: break;
+                    case 3: Stage stage = new Stage();
+                            Label timename = new Label("Time:");
+                            Label time = new Label();
+                            ReadToken rt = new ReadToken();
+                            GetScoreRequest scoreRequest = null;
+                            try {
+                                scoreRequest = new GetScoreRequest(rt.token());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                System.out.println("No token");
+                            }
+
+                            GetScoreCallback getScoreCallback = null;
+
+                            try {
+                                getScoreCallback = scoreRequest.getScore();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if(!getScoreCallback.isSuccess()){
+                                System.out.println("Success:"+getScoreCallback.isSuccess()+" Message:"+getScoreCallback.getMessage());
+                            }
+                            else{
+                                System.out.println("Success:"+getScoreCallback.isSuccess()+" Win percentage:"+getScoreCallback.getWon()+" Average Time:"+getScoreCallback.getTime());
+                                time.setText(""+getScoreCallback.getTime());
+                            }
+                            HBox hb = new HBox();
+                            hb.getChildren().add(timename);
+                            hb.getChildren().add(time);
+                            Scene scene = new Scene(hb);
+                            stage.setScene(scene);
+                            stage.showAndWait();
+                            break;
+
+
 
                 }
             });

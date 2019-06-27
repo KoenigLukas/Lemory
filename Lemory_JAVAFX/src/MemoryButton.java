@@ -19,7 +19,7 @@ public class MemoryButton extends Button implements EventHandler<ActionEvent> {
         this.visible = true;
         this.text=arr[id];
 //        imgv=new ImageView("./images/" + String.valueOf(this.id) + ".png");
-            back=new ImageView("images/back.png");
+//            back=new ImageView("./images/back.png");
 
     }
 
