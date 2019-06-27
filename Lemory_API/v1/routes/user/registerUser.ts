@@ -1,5 +1,5 @@
 import * as express from 'express';
-import sql = require('../../../../db');
+import sql = require('../../../db');
 
 import * as Joi from 'joi';
 import * as jwt from 'jsonwebtoken';
