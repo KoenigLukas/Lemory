@@ -27,7 +27,7 @@ server.use('/api/v1/user/login', v1loginRouter);
 server.use('/api/v1/user/register', v1registerRouter);
 server.use('/api/v1/user/stats/get', v1getStatsRouter);
 server.use('/api/v1/user/stats/put', v1putStatsRouter);
-server.use('/api/v1/user/stats/getbest', v1getBestTimeRouter);
+server.use('/api/v1/user/stats/getbesttime', v1getBestTimeRouter);
 server.use('/api/v1/user/stats/gettimesplayed', v1getNumPlayedGamesRouter);
 
 
