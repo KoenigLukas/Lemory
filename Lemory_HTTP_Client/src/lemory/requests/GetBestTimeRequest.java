@@ -24,7 +24,7 @@ public class GetBestTimeRequest {
 
     public GetBestTimeCallback getBestTime() throws IOException {
 
-        String url = "http://185.168.8.159:3001/api/v1/user/stats/getbest";
+        String url = "http://185.168.8.159:3001/api/v1/user/stats/getbesttime";
 
 
         URL obj = new URL(url);

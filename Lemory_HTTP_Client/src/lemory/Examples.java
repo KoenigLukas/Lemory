@@ -177,6 +177,10 @@ public class Examples {
             System.out.println("Success:"+bestTimeCallback.isSuccess()+" Best Time:"+bestTimeCallback.getTime());
         }
 
+        /*
+             RESET STATS
+         */
+
         DeleteStatsRequest deleteStatsRequest = new DeleteStatsRequest(token);
 
         BasicCallback deleteSubmitCallback = null;
