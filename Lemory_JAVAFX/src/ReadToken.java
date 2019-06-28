@@ -7,7 +7,7 @@ public class ReadToken {
     public String token() throws IOException {
         String token="1";
         String line;
-        BufferedReader br = new BufferedReader(new FileReader("token.nigga"));
+        BufferedReader br = new BufferedReader(new FileReader("token.tok"));
         token=br.readLine();
         br.close();
 

@@ -116,7 +116,7 @@ public class Login {
         }
     }
     private void printtoken(String token){
-        try (BufferedWriter br= new BufferedWriter(new FileWriter("token.nigga"))){
+        try (BufferedWriter br= new BufferedWriter(new FileWriter("token.tok"))){
             br.write(token);
         } catch (IOException e) {
             e.printStackTrace();
