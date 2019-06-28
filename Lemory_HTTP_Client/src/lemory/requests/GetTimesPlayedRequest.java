@@ -1,7 +1,6 @@
 package lemory.requests;
 
 import com.google.gson.Gson;
-import lemory.schemas.callbacks.GetScoreCallback;
 import lemory.schemas.callbacks.GetTimesPlayedCallback;
 
 import java.io.BufferedReader;

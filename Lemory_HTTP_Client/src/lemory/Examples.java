@@ -1,10 +1,7 @@
 package lemory;
 
-import lemory.exceptions.DateMissMatchException;
-import lemory.exceptions.EmailMissMatchException;
 import lemory.requests.*;
 import lemory.schemas.LoginUser;
-import lemory.schemas.RegisterUser;
 import lemory.schemas.SubmitScore;
 import lemory.schemas.callbacks.*;
 

@@ -1,10 +1,7 @@
 package lemory.requests;
 
 import com.google.gson.Gson;
-import lemory.exceptions.UsernameNotAvailableException;
-import lemory.schemas.callbacks.AvailabiltyCallback;
 import lemory.schemas.callbacks.GetBestTimeCallback;
-import lemory.schemas.callbacks.GetScoreCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;

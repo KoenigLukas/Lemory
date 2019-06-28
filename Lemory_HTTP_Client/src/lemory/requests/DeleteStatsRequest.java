@@ -2,7 +2,6 @@ package lemory.requests;
 
 import com.google.gson.Gson;
 import lemory.schemas.callbacks.BasicCallback;
-import lemory.schemas.callbacks.GetScoreCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;

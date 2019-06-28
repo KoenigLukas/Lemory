@@ -12,10 +12,6 @@ import v1getNumPlayedGamesRouter = require('./v1/routes/user/stats/getTimesPlaye
 import v1resetStatsRouter = require('./v1/routes/user/stats/resetStats');
 
 
-
-
-
-
 // @ts-ignore
 const server = express();
 
