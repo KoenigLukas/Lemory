@@ -137,6 +137,10 @@ public class Register {
         GridPane.setHalignment(submitButton, HPos.CENTER);
         GridPane.setMargin(submitButton, new Insets(20, 0,20,0));
 
+        Button back = new Button("Back To Menu");
+        back.setPrefSize(200,100);
+        gridPane.add(back,0,8);
+
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -168,6 +172,13 @@ public class Register {
                 String birthdate= checkInDatePicker.getValue() + "";
                 registeruser3(usernamefield.getText(), passwordfield.getText(),emailfield.getText(),firstnameField.getText(),lastnameField.getText(),birthdate,window);
                 showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "You are now registered " + usernamefield.getText());
+            }
+        });
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FormWindow formWindow = new FormWindow();
+                formWindow.form(window);
             }
         });
     }

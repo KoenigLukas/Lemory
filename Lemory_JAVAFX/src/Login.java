@@ -44,7 +44,11 @@ public class Login {
         Label lblPassword = new Label("Password");
         final PasswordField pf = new PasswordField();
         Button btnLogin = new Button("Login");
+        btnLogin.setDefaultButton(true);
         final Label lblMessage = new Label();
+        Button register = new Button("Register");
+        Button close = new Button("Close");
+
 
         //Adding Nodes to GridPane layout
         gridPane.add(lblUserName, 0, 0);
@@ -53,6 +57,10 @@ public class Login {
         gridPane.add(pf, 1, 1);
         gridPane.add(btnLogin, 2, 1);
         gridPane.add(lblMessage, 1, 2);
+        HBox buttons = new HBox();
+        buttons.getChildren().add(register);
+        buttons.getChildren().add(close);
+        bp.setBottom(buttons);
 
 
 
@@ -73,6 +81,21 @@ public class Login {
         btnLogin.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 checklog(txtUserName.getText(),pf.getText(),windowform);
+            }
+        });
+
+        close.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+
+        register.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Register register = new Register();
+                register.registerform(windowform);
             }
         });
 

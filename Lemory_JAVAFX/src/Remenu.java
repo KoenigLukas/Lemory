@@ -49,6 +49,7 @@ public class Remenu {
                 new MenuItem("Play Multiplayer",1, windowform),
                 new MenuItem("Reset Stats",2,windowform),
                 new MenuItem("Stats",3,windowform),
+                new MenuItem("Logout",4, windowform),
                 itemExit);
         menu.setTranslateX(100);
         menu.setTranslateY(300);
@@ -56,8 +57,6 @@ public class Remenu {
         root.getChildren().addAll(title, menu);
         scene = new Scene(root);
         windowform.setScene(scene);
-
-
     }
 
     private static class Title extends StackPane {
@@ -135,13 +134,13 @@ public class Remenu {
                             break;
                     case 1: break;
                     case 2: ReadToken readToken = new ReadToken();
-                        DeleteStatsRequest deleteStatsRequest = null;
-                        try {
-                            deleteStatsRequest = new DeleteStatsRequest(readToken.token());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        BasicCallback deleteSubmitCallback = null;
+                            DeleteStatsRequest deleteStatsRequest = null;
+                            try {
+                                deleteStatsRequest = new DeleteStatsRequest(readToken.token());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            BasicCallback deleteSubmitCallback = null;
                             try {
                                 deleteSubmitCallback = deleteStatsRequest.deleteStats();
                             } catch (IOException e) {
@@ -150,43 +149,16 @@ public class Remenu {
 
                             System.out.println("Success:"+deleteSubmitCallback.isSuccess()+" Message:"+deleteSubmitCallback.getMessage());
                             break;
-                    case 3: Stage stage = new Stage();
-                            Label timename = new Label("Time:");
-                            Label time = new Label();
-                            ReadToken rt = new ReadToken();
-                            GetScoreRequest scoreRequest = null;
+                    case 3: ShowStats showStats = new ShowStats();
                             try {
-                                scoreRequest = new GetScoreRequest(rt.token());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                System.out.println("No token");
-                            }
-
-                            GetScoreCallback getScoreCallback = null;
-
-                            try {
-                                getScoreCallback = scoreRequest.getScore();
+                                showStats.printStats(windowform);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-                            if(!getScoreCallback.isSuccess()){
-                                System.out.println("Success:"+getScoreCallback.isSuccess()+" Message:"+getScoreCallback.getMessage());
-                            }
-                            else{
-                                System.out.println("Success:"+getScoreCallback.isSuccess()+" Win percentage:"+getScoreCallback.getWon()+" Average Time:"+getScoreCallback.getTime());
-                                time.setText(""+getScoreCallback.getTime());
-                            }
-                            HBox hb = new HBox();
-                            hb.getChildren().add(timename);
-                            hb.getChildren().add(time);
-                            Scene scene = new Scene(hb);
-                            stage.setScene(scene);
-                            stage.showAndWait();
                             break;
-
-
-
+                    case 4: Login login = new Login();
+                            login.loginform(windowform);
+                            break;
                 }
             });
         }
